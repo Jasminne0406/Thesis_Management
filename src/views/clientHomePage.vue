@@ -1,5 +1,5 @@
 <template>
-  <header_navbar></header_navbar>
+  <header_Client></header_Client>
   <carousel_dashboard
     style="width: 95%; margin: auto; margin-bottom: 30px; border-radius: 15px"
   ></carousel_dashboard>
@@ -169,14 +169,14 @@
   <footer_dashboard></footer_dashboard>
 </template>
 <script>
-import header_navbar from "@/components/header_navbar.vue";
+import header_Client from "@/components/header_Client.vue";
 import carousel_dashboard from "@/components/carousel_dashboard.vue";
 import footer_dashboard from "@/components/footer_dashboard.vue";
 import axios from "axios";
 export default {
-  name: "adminHomePage",
+  name: "adminDashboard",
   components: {
-    header_navbar,
+    header_Client,
     carousel_dashboard,
     footer_dashboard,
   },
@@ -236,7 +236,7 @@ export default {
     },
     async viewDetail(thesis) {
       localStorage.setItem("thesis_id", thesis.thesis_id);
-      this.$router.push("/detailPage");
+      this.$router.push("/client/ViewDetail");
     },
   },
 };

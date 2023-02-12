@@ -1,12 +1,9 @@
 
 <template>
-    <div style="width:100%; height:50px; margin-top: 0px; background-color: #0E426A"></div>
-    <body class="bodyContact" id="photo2">
-    <!----body-->
-    <section>
-        <!---space-->
-        <div class="empty contact-section">
-            <section class="contact">
+<header_navbar></header_navbar>
+<div class="img2">
+        <div class="contact-section">
+            <section class="contact" style="margin-top: -70px">
                 <div class="container-contact">
                     <div class="direct-contact-container">
                         <ul class="contact-list">
@@ -30,19 +27,19 @@
                         <hr />
                         <ul class="social-media-list">
                             <li>
-                                <a class="contact-icon" href="https://web.facebook.com/itckh?_rdc=1&_rdr"><font-awesome-icon :icon="['fab', 'facebook']" /></a>
+                                <v-img class="contact-icon" src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-facebook_-512.png"></v-img>
                             </li>
                             <li>
-                                <a class="contact-icon" href="https://www.instagram.com/explore/tags/angkorwat/?hl=fr"><font-awesome-icon :icon="['fab', 'instagram']" /></a>
+                                <v-img class="contact-icon" src="https://icons-for-free.com/iconfiles/png/512/colored+gradient+instagram+media+social+social+media+icon-1320192520147384507.png"></v-img>
                             </li>
                             <li>
-                                <a class="contact-icon" href="https://twitter.com/INSA_Rennes"><font-awesome-icon :icon="['fab', 'twitter']" /></a>
+                                <v-img class="contact-icon" src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/telegram-512.png"></v-img>
                             </li>
                         </ul>
                         <hr />
                         <div class="copyright">&copy; ALL OF THE RIGHTS RESERVED</div>
                     </div>
-                    <div class="contactForm" >
+                    <div class="contactForm" style="margin-top: 250px">
                         <form>
                             <h2>Send Message</h2>
                             <div class="inputBox" >
@@ -54,40 +51,47 @@
                             <div class="inputBox">
                                 <textarea required=true placeholder="Type your Message..."></textarea>
                             </div>
-                            <div class="inputBox">
-                                <input type="submit" name="" value="Send" />
+                            <div class="inputBox" >
+                                <input type="submit" style="background-color: teal" name="" value="Send" />
                             </div>
                         </form>
                     </div>
                 </div>
             </section>
         </div>
-    </section>
-  </body>
+</div>
 </template>
-<style scoped>
+<script>
+import header_navbar from "@/components/header_navbar.vue";
+export default {
+  name: "contactPage",
+  components: {
+    header_navbar
+  },
+};
+</script>
+<style>
+.img2{
+  width: 100%;
+  height: 700px;
+  margin-top:-10px;
+  background: url("@/assets/book2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 80%;
+}
 .bodyContact {
     background: #fff;
-}
-#photo2{
-    background: url("@/assets/book2.jpg")
 }
 .listIcon {
     height: 25px;
 }
 /* Contact -start CSS*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
 .contact-section{
   position: relative;
 }
 .contact{
     position: absolute;
-    top: 50%;
+    top: 0%;
     left: 50%;
     transform:translate(-50%,-50%);
 }
@@ -155,6 +159,7 @@
 }
 input[type=submit]{
   border-radius: 3%;
+  
 }
 .inputBox input{
   /* border-bottom: none; */

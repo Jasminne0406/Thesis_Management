@@ -20,7 +20,7 @@ exports.logout = (req,res) => {
 
 
 exports.uploadThesis = async (req,res) => {
-    const path = "C:/Users/Rose/Desktop/ITC/Image Processing/" + req.body.name
+    const path = "C:/Users/Rose/Desktop/Thesis/" + req.body.name
     var file = fs.readFileSync(path);
     const thesis = { 
         student_id: req.body.student_id,
@@ -117,7 +117,7 @@ exports.updateThesis = (req,res) => {
             status: req.body.status,
             department: req.body.department,
             intern_year: req.body.intern_year,
-            uploadAt: req.body.uploadAt,
+            uploadAt:req.body.uploadAt,
             download: req.body.download
         }
     }

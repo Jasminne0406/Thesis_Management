@@ -6,18 +6,24 @@ import contactPage from '../../src/views/contactPage.vue';
 import thesisPage from '../../src/views/thesisPage.vue';
 import aboutusPage from '../../src/views/aboutusPage.vue';
 import thesisView from '../../src/views/thesisView.vue';
-
-
+import clientViewDetail from '../../src/views/clientViewDetail.vue';
+import clientHomePage from '../../src/views/clientHomePage.vue';
+import clientThesisPage from '../../src/views/clientThesisPage.vue';
 const routes = [
     {
-        path: '/',
+        path: '/login',
         name: 'loginPage',
         component: loginPage
     },
     {
-        path: '/homepage',
-        name: 'adminPage',
+        path: '/adminHomePage',
+        name: 'adminHomePage',
         component: adminHomePage
+    },
+    {
+        path: '/',
+        name: 'clientPage',
+        component: clientHomePage
     },
     {
         path: '/detailPage',
@@ -43,6 +49,16 @@ const routes = [
         path: '/thesisView',
         name: 'thesisView',
         component: thesisView
+    },
+    {
+        path: '/client/ViewDetail',
+        name: 'clientViewDetail',
+        component: clientViewDetail
+    },
+    {
+        path: '/client/thesisPage',
+        name: 'clientThesisPage',
+        component: clientThesisPage
     },
 ]
 

@@ -1,27 +1,32 @@
 <template>
-  <header_navbar></header_navbar>
-  <div class="home">
-    <button
-      class="bt-modal"
-      style="
-        background-color: orange;
-        padding: 5px;
-        border: 1px solid gray;
-        margin-top:10px;
-        box-shadow: 1px 1px 2px grey;
-        font-family: serif;
-        color: black
-      "
-      @click="toggleModal"
-      type="button"
-    >
-      Add New
-    </button>
+  <header_navbar>
+  </header_navbar>
+  <div
+        class="bt-modal"
+        style="
+          background-color: gray;
+          padding: 5px;
+          border: 1px solid lightgray;
+          box-shadow: 1px 1px 2px grey;
+          font-family: serif;
+          color: white;
+          border-radius: 50%;
+          width:40px;
+          height:40px;
+          font-size:20px;
+          position: absolute;
+          right:30px;
+          top: 10px;
+          cursor: pointer
+        "
+        @click="toggleModal"
+      >
+        +
   </div>
   <listThesis></listThesis>
   <Modal @close="toggleModal" @submitted="upload" :modalActive="modalActive">
     <div class="modal-content">
-      <h1>Add New Information</h1>
+      <h1>Add New Thesis</h1>
       <form @submit.prevent="submit">
         <v-row style="margin-top: 10px">
           <v-text-field
@@ -87,15 +92,11 @@
           ></v-text-field>
         </v-row>
         <v-row>
-          <v-text-field
-            v-model="status"
-            :counter="100"
-            :error-messages="errors"
-            label="Status"
-            required
-          ></v-text-field>
+          <input type="radio" id="checkbox" name="radio" value="recommend"> <span style="margin-left:10px">Recommend</span>
         </v-row>
-        <input type="file" id="addDocument" class="form-control-file" />
+        <v-row style="margin-top:30px; margin-bottom:15px">
+          <input type="file" id="addDocument" class="form-control-file" />
+        </v-row>
       </form>
     </div>
   </Modal>
@@ -125,7 +126,7 @@ export default {
       category: null,
       status: null,
       intern_year: null,
-      uploadAt: null,
+      uploadAt: null
       }
    },
   setup() {
@@ -135,9 +136,18 @@ export default {
     };
     return { modalActive, toggleModal };
   },
+  mounted(){
+    this.thesis_id = "T-"+Math.floor((1 + Math.random()) * 0x1000).toString(16).substring(1);
+  },
   methods: {
     upload() {
       const fileSelector = document.getElementById("addDocument");
+      const checkbox = document.getElementById("checkbox");
+      if(checkbox.checked){
+        this.status = "recommend"
+      }else{
+        this.status = null
+      }
       axios
         .post(
           "http://localhost:3000/admin/uploadThesis",
@@ -151,7 +161,7 @@ export default {
             category: this.category,
             status: this.status,
             intern_year: this.intern_year,
-            uploadAt: this.uploadAt,
+            uploadAt: new Date().toUTCString(),
             contentType: fileSelector.files[0].type,
             name: fileSelector.files[0].name,
           },
@@ -176,7 +186,7 @@ export default {
   // justify-content: center;
   // align-items: center;
   // float: right;
-  margin-left: 91%;
+  margin-left: 96%;
 }
 
 .bt-modal {

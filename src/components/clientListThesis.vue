@@ -6,15 +6,15 @@
     </h1>
     <v-text-field
         v-model="search"
-        label="Search by  ThesisID,  AuthorID,  Department,  Category, Title"
+        label="Search"
         single-line
         hide-details
-        style="margin-left: 54%; width:600px; margin-bottom: 20px; position: absolute"
+        style="margin-left: 69%; width:400px; margin-bottom: 20px; position: absolute"
   >
   <v-img style="right:15px; width: 20px;position: absolute; height:20; top: 20px; cursor: pointer"  src="@/assets/search2.png"></v-img>
   </v-text-field>
   </div>
-  <div class="file_wrappers" style="position: relative" >
+   <div class="file_wrappers" style="position: relative" >
     <table class="table table-hover" style="margin:auto">
       <thead class="thead-dark">
         <tr>
@@ -120,15 +120,6 @@
         <td>
           <v-btn
             class="float-right"
-            style="margin-left: 10px; font-size: 12px; border-radius: 20px; padding:7px"
-            depressed
-            color="red darken-1"
-            @click = "delete2(thesis)"
-          >
-            Delete
-          </v-btn>
-          <v-btn
-            class="float-right"
             style="margin: auto; font-size: 12px; border-radius: 20px; padding:7px"
             depressed
             color="teal lighten-1"
@@ -145,7 +136,6 @@
 <script>
 import axios from "axios";
 export default {
-    name: "listThesis",
     data() {
       return {
         dialog: false,
@@ -175,16 +165,16 @@ export default {
     },
     async viewDetail(thesis){
       localStorage.setItem("thesis_id", thesis.thesis_id);
-      this.$router.push("/detailPage")
+      this.$router.push("/client/viewDetail")
     },
-    async delete2(thesis) {
+    async delete2(thesis_id) {
       axios
           .delete(
-            "http://localhost:3000/admin/deleteThesis/"+thesis.thesis_id,
+            "http://localhost:3000/admin/deleteThesis/"+thesis_id,
             { withCredentials: true }
           )
       alert ("Are you sure you want to delete this Thesis?")
-      window.location.reload();
+      this.$router.push("/thesisPage")
     },
     async searchThesis(thesis) {
       const url = "http://localhost:3000/admin/searchThesis/"+thesis;

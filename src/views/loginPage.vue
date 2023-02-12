@@ -160,7 +160,7 @@ export default {
           .then(response => {
             console.log(response)
             console.log(this.email)
-            this.$router.push("/homepage")
+            this.$router.push("/adminHomePage")
           })
     },
   }

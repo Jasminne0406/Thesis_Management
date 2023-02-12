@@ -1,5 +1,5 @@
 <template>
-  <header_navbar></header_navbar>
+  <header_client></header_client>
   <v-container style="display: flex; flex-wrap: wrap; margin: auto; margin-left: 90px">
     <div
       style="box-shadow: 1px 1px 5px gray; border: 1px lightgrey solid;border-radius:5px; width: 500px; height: 350px padding-top:20px"
@@ -59,23 +59,7 @@
         <p class="font-weight-black">ID :</p>
         <p class="font-weight-black">Email :</p>
         <p class="font-weight-black">Upload At :</p>
-        <v-btn color="secondary" @click="toggleModal" class="mr-10 mt-10">Edit</v-btn>
-        <v-btn color="red mt-10 mr-1" style="margin-left: -20px" @click="delete2"
-          >Delete</v-btn
-        >
-        <v-img
-          src="@/assets/download.png"
-          @click="download"
-          class="download"
-          style="
-            left: 230px;
-            width: 30px;
-            position: absolute;
-            height: 30;
-            bottom: 50px;
-            cursor: pointer;
-          "
-        ></v-img>
+        <v-btn color="secondary" @click="download" style="margin-left: 300px" class="mt-10">Download</v-btn>
       </div>
       <div
         style=" font-size:1.2rem; font-family: serif; height: 350px padding-top:20px; text-align: left; margin-left:-60px"
@@ -135,7 +119,6 @@
               background-color: orange;
             "
             max-width="100"
-            @click="viewDetail(thesis)"
           >
             Read more!
           </v-btn>
@@ -145,95 +128,15 @@
     </div>
   </div>
   <footer_dashboard></footer_dashboard>
-  <Modal @close="toggleModal" @submitted="update" :modalActive="modalActive">
-    <div class="modal-content">
-      <h1>Edit Information</h1>
-      <form @submit.prevent="submit">
-        <v-row style="margin-top: 10px">
-          <v-text-field
-            v-model="student_id"
-            :error-messages="errors"
-            label="Student ID"
-            required
-            style="padding-right: 20px"
-          ></v-text-field>
-          <v-text-field
-            v-model="student_name"
-            :counter="100"
-            :error-messages="errors"
-            label="Student Name"
-            required
-          ></v-text-field>
-        </v-row>
-        <v-row>
-          <v-text-field
-            v-model="student_email"
-            :counter="100"
-            :error-messages="errors"
-            label="Student Email"
-            style="padding-right: 20px"
-            required
-          ></v-text-field>
-
-          <v-text-field
-            v-model="department"
-            :counter="100"
-            :error-messages="errors"
-            label="Department"
-            required
-          ></v-text-field>
-        </v-row>
-
-        <v-row>
-          <v-text-field
-            v-model="thesis_id"
-            :counter="100"
-            :error-messages="errors"
-            label="Thesis ID"
-            style="padding-right: 20px"
-            required
-          ></v-text-field>
-
-          <v-text-field
-            v-model="category"
-            :counter="100"
-            :error-messages="errors"
-            label="Category"
-            required
-          ></v-text-field>
-        </v-row>
-        <v-row>
-          <v-text-field
-            v-model="title"
-            :error-messages="errors"
-            label="Title"
-            required
-          ></v-text-field>
-        </v-row>
-        <v-row>
-          <v-text-field
-            v-model="status"
-            :counter="100"
-            :error-messages="errors"
-            label="Status"
-            required
-          ></v-text-field>
-        </v-row>
-      </form>
-    </div>
-  </Modal>
 </template>
 <script>
-import Modal from "@/components/popup_form.vue";
-import { ref } from "vue";
 import footer_dashboard from "@/components/footer_dashboard.vue";
-import header_navbar from "@/components/header_navbar.vue";
+import header_client from "@/components/header_Client.vue";
 import axios from "axios";
 export default {
   name: "detailPage",
   components: {
-    header_navbar,
-    Modal,
+    header_client,
     footer_dashboard,
   },
   data: () => ({
@@ -252,19 +155,11 @@ export default {
     category: null,
     status: null,
     searchTxt: null,
-    uploadAt:null,
     downloadNum: 0,
-    thesis2: null
+    thesis2:null
   }),
   mounted() {
     this.getAllThesis();
-  },
-  setup() {
-    const modalActive = ref(false);
-    const toggleModal = () => {
-      modalActive.value = !modalActive.value;
-    };
-    return { modalActive, toggleModal };
   },
   watch: {
     searchTxt: function () {
@@ -277,14 +172,46 @@ export default {
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
-    async viewDetail(thesis) {
-      localStorage.setItem("thesis_id", thesis.thesis_id);
-      window.location.reload();
-      this.$router.push("/detailPage");
-    },
-    async getAllThesis() {
-      const url = "http://localhost:3000/admin/getAllThesis";
-      const response = await axios.get(url, { withCredentials: true });
+    // async getAllThesis() {
+    //   const url = "http://localhost:3000/admin/getAllThesis";
+    //   const response = await axios.get(url, { withCredentials: true });
+    //   this.getThesis = response.data;
+    //   this.total = response.data.length;
+    //   for (let i = 0; i < this.total; i++) {
+    //     this.image.push(
+    //       "data:" +
+    //         this.getThesis[i].thesis.contentType +
+    //         ";base64," +
+    //         this.getThesis[i].thesis.data
+    //     );
+    //   }
+    //   let k = 0;
+    //   this.getThesis.forEach((element) => {
+    //     (element.image = this.image[k]), k++;
+    //   });
+    //   // console.log(this.getThesis[0])
+    //   // this.chosenThesis = this.getThesis[0];
+    //   // console.log(this.chosenThesis)
+    //   for (let i = 0; i < this.total; i++) {
+    //     if (this.getThesis[i].thesis_id === localStorage.getItem("thesis_id")) {
+    //       this.chosenThesis = this.getThesis[i];
+    //       console.log(this.chosenThesis);
+    //     }
+    //   }
+    //   (this.student_id = this.chosenThesis.student_id),
+    //     (this.student_name = this.chosenThesis.student_name),
+    //     (this.student_email = this.chosenThesis.student_email),
+    //     (this.department = this.chosenThesis.department),
+    //     (this.thesis_id = this.chosenThesis.thesis_id),
+    //     (this.title = this.chosenThesis.title),
+    //     (this.category = this.chosenThesis.category),
+    //     (this.status = this.chosenThesis.status);
+    //     console.log(this.chosenThesis.download+1)
+    //   // localStorage.setItem("thesis_id", "");
+    // },
+     async getAllThesis() {
+      const url1 = "http://localhost:3000/admin/getAllThesis";
+      const response = await axios.get(url1, { withCredentials: true });
       this.getThesis = response.data;
       this.total = response.data.length;
       for (let i = 0; i < this.total; i++) {
@@ -316,9 +243,7 @@ export default {
         (this.title = this.chosenThesis.title),
         (this.category = this.chosenThesis.category),
         (this.status = this.chosenThesis.status);
-        console.log(this.chosenThesis.download+1)
-        this.uploadAt = this.chosenThesis.uploadAt
-      // localStorage.setItem("thesis_id", "");
+      console.log(this.chosenThesis.download + 1);
       const url2 = "http://localhost:3000/admin/searchThesis/"+this.chosenThesis.department;
       const response2 = await axios.get(
           url2,
@@ -354,7 +279,6 @@ export default {
             status: this.status,
             intern_year: this.intern_year,
             uploadAt: this.uploadAt,
-            download: this.chosenThesis.download
           },
           { withCredentials: true }
         )
@@ -393,6 +317,10 @@ export default {
       });
       alert("Are you sure you want to delete this Thesis?");
       this.$router.push("/homepage");
+    },
+    async viewDetail(thesis) {
+      localStorage.setItem("thesis_id", thesis.thesis_id);
+      this.$router.push("/detailPage");
     },
   },
 };

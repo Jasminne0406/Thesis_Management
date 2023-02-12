@@ -8,10 +8,10 @@
         <!-- <search_bar style="position: absolute;"></search_bar> -->
         <div class="text" style="margin:auto;position:relative; color: black">
             <v-row style="top:10px; ">
-                <router-link  style="text-decoration: none" to="/adminHomePage">
+                <router-link  style="text-decoration: none" to="/">
                     <v-colume id="header-menu">Home</v-colume>
                 </router-link>
-                <router-link style="text-decoration: none" to="/thesisPage">
+                <router-link style="text-decoration: none" to="/client/thesisPage">
                     <v-colume id="header-menu">Thesis</v-colume>
                 </router-link>
                 <router-link style="text-decoration: none" to="/aboutusPage">
@@ -22,13 +22,14 @@
                 </router-link>
             </v-row>
         </div>
+        <v-img @click=login style="cursor: pointer; right:20px;top:10px; width: 50px;position: absolute; height:30px"  src="@/assets/enter.png"></v-img>
     </div>  
 </template>
 
 <script>
 // import search_bar from './search_bar.vue';
 export default {
-    name: "header_navbar",
+    name: "header_Client",
     methods:{
             async login(){
                 this.$router.push("/login")
