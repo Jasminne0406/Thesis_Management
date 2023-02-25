@@ -60,7 +60,7 @@
   </div>
   <div style="display: flex; flex-wrap: wrap; margin-left: 3rem">
     <div
-      v-for="(thesis, i) in getPopularThesis"
+      v-for="(thesis, i) in getThesis"
       v-bind:key="i"
       style="width: 250px; padding: 20px"
     >

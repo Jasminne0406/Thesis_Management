@@ -17,7 +17,7 @@ const thesisTable = db.collection("thesis");
 //         contentType:String
 //    },
 //    uploadAt: { type: Date, default: Date.now},
-//    download: Integer
+//    download: String
 // })
 
 // const thesisTable  = new mongoose.model("thesis", thesisSchema)

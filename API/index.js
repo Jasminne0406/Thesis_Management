@@ -4,7 +4,7 @@ const app = express();
 const routes = require('./routes/routes');
 const mongoose = require("mongoose"); 
 mongoose.set("strictQuery", false);
-const url = "mongodb://127.0.0.1:27017/Thesis_Management";
+const url = "mongodb+srv://prakmlis:dav0406$$@cluster0.wfmfo.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(url,()=>{
     console.log("Database connected")
 });

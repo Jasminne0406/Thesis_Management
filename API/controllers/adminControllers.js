@@ -4,7 +4,11 @@ const {
 const fs = require("fs");
 
 exports.login = (req,res) => {
-    res.send("Admin logined!")
+    if(req.body.email === 'admin' && req.body.password==='admin'){
+        res.json({
+            message: "login successfully 😊 👌",
+        });
+    }
 }
 
 exports.logout = (req,res) => {
@@ -37,8 +41,7 @@ exports.uploadThesis = async (req,res) => {
         status: req.body.status,
         department: req.body.department,
         intern_year: req.body.intern_year,
-        uploadAt: req.body.uploadAt,
-        download: 0
+        uploadAt: req.body.uploadAt
     }
     thesisTable.insertOne(thesis);
     console.log("New Report Added Successfully!");
@@ -97,8 +100,6 @@ exports.searchThesis = async (req,res) => {
         console.log(req.params.search)
     })
 }
-
-
 exports.deleteThesis = (req,res) => {
     thesisTable.deleteOne({thesis_id: req.params.id})
     console.log("Report Delete Successfully!")
